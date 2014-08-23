@@ -52,17 +52,29 @@ val futureNumber: Future[IncomingPhoneNumber] = client.execute[IncomingPhoneNumb
 
 //Get Local Incoming phone number
 val request = IncomingPhoneNumbersRequest(phoneNumberType = Option(Local))
-val futureNumbers = client.execute[IncomingPhoneNumbersRequest, IncomingPhoneNumbers](request)
+val futureNumbers: Future[IncomingPhoneNumbers] = client.execute[IncomingPhoneNumbersRequest, IncomingPhoneNumbers](request)
       
 //Get Mobile Incoming phone number
 val request = IncomingPhoneNumbersRequest(phoneNumberType = Option(Mobile))
-val futureNumbers = client.execute[IncomingPhoneNumbersRequest, IncomingPhoneNumbers](request)
+val futureNumbers: Future[IncomingPhoneNumbers] = client.execute[IncomingPhoneNumbersRequest, IncomingPhoneNumbers](request)
 
 //Update account information
 val request = UpdateAccountRequest(friendlyName = Option("my new friendly Name"))
 val futureAccountInfo: Future[Account] = client.execute[UpdateAccountRequest, Account](request)
 
-      
+// Modifying Live Calls
+val uri = "http://twimlets.com/message?Message=Hello" //redirect the call to the new TwiML
+val liveRequest = LiveCallRequest(call.sid, Option(uri))
+val futureLiveCall: Future[Call] = client.execute[LiveCallRequest, Call](liveRequest)
+
+//Make a SIP call
+val uri = "http://twimlets.com/message?Message=Hello" //a TwiML
+val request = SipCallRequest(to = "sip:kate@example.com", from = Option("me"), url = Option(uri))
+val futureSIPCall: Future[Call] = client.execute[SipCallRequest, Call](request)
+
+//Get Local Available phone number
+val request = AvailablePhoneNumbersLocalRequest(isoCountryCode = "US", distance = Some("50"), areaCode = Option("212"))
+val futureNumbers: Future[AvailablePhoneNumbers] = client.execute[AvailablePhoneNumbersLocalRequest, AvailablePhoneNumbers](request)
 
 
 ```
