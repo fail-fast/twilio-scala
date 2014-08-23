@@ -23,7 +23,7 @@ class SendSmsTest extends FeatureSpec with GivenWhenThen with ScalaFutures with 
       val config = ConfigFactory.load()
       val client = TwilioRestClient(sid = config.getString("twilio.sid"), authToken = config.getString("twilio.token"))
 
-      val request = SmsRequest(config.getString("twilio.from"), config.getString("twilio.to"), Option("what's up?"))
+      val request = SmsRequest(from = config.getString("twilio.from"), to = config.getString("twilio.to"), body = Option("what's up?"))
 
       When("the request get sent to twilio")
 

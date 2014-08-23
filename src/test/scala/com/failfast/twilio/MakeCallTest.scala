@@ -28,13 +28,11 @@ class MakeCallTest extends FeatureSpec with GivenWhenThen with ScalaFutures with
 
       When("the request get send to twilio")
 
-      val futureNumbers = client.execute[CallRequest, Call](request)
-
-      futureNumbers.onFailure{ case e: TwilioException => println(e.error)}
+      val futureCall = client.execute[CallRequest, Call](request)
 
       Then("Call must have a valid call ID")
 
-      whenReady(futureNumbers, timeout(Span(10, Seconds))){ call =>
+      whenReady(futureCall, timeout(Span(10, Seconds))){ call =>
 
         assert(call.sid.nonEmpty)
 

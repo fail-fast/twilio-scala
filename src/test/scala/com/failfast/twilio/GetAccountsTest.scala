@@ -22,7 +22,7 @@ class GetAccountsTest extends FeatureSpec with GivenWhenThen with ScalaFutures w
       val config = ConfigFactory.load()
       val client = TwilioRestClient(sid = config.getString("twilio.sid"), authToken = config.getString("twilio.token"))
 
-      val request = AccountsRequest(friendlyName = Option("marcelo"), status = Option("active"),page = Option(0), pageSize = Option(5))
+      val request = AccountsRequest(status = Option("active"), page = Option(0), pageSize = Option(5))
 
       When("the request get send to twilio")
 

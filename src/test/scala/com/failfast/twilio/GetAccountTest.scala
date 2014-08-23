@@ -8,6 +8,8 @@ import org.scalatest._
 import org.scalatest.concurrent.{ScalaFutures}
 import org.scalatest.time.{Span, Seconds}
 
+import scala.concurrent.Future
+
 
 class GetAccountTest extends FeatureSpec with GivenWhenThen with ScalaFutures with EitherValues with Matchers{
 
@@ -26,7 +28,7 @@ class GetAccountTest extends FeatureSpec with GivenWhenThen with ScalaFutures wi
 
       When("the request get send to twilio")
 
-      val futureAccountInfo = client.execute[AccountRequest, Account](getAccountRequest)
+      val futureAccountInfo: Future[Account] = client.execute[AccountRequest, Account](getAccountRequest)
 
       Then("Get the account information")
 
