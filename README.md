@@ -1,5 +1,5 @@
 ----------
-twilio-scala
+[experimental] twilio-scala
 ============
 
 Implementation of a non blocking Twilio client in Scala based on Spray.io.
