@@ -22,6 +22,7 @@ case class EndpointImpl(url: String) extends Endpoint
 object Endpoints{
 
   implicit def accountEndpoint(r: AccountRequest, credential: Credential): Endpoint = EndpointImpl(s"/Accounts/${credential.sid}.json")
+  implicit def createTokenEndpoint(r: CreateTokenRequest, credential: Credential): Endpoint = EndpointImpl(s"/Accounts/${credential.sid}/Tokens.json")
   implicit def updateAccountEndpoint(r: UpdateAccountRequest, credential: Credential): Endpoint = EndpointImpl(s"/Accounts/${credential.sid}.json")
   implicit def accountsEndpoint(r: AccountsRequest, credential: Credential): Endpoint = EndpointImpl(s"/Accounts.json")
   implicit def sendSmsEndpoint(r: SmsRequest, credential: Credential): Endpoint = EndpointImpl(s"/Accounts/${credential.sid}/Messages.json")
