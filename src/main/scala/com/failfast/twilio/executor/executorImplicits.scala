@@ -44,6 +44,20 @@ object ExecutorImplicits extends Logging with DefaultJsonFormats{
   }
 
 
+  implicit object CreateTokenExecutor extends OperationExecutor[CreateTokenRequest, Token]{
+
+    def execute(request: CreateTokenRequest) (credential: Credential): Future[Token] = {
+
+      val fResponse = pipeline.map( p => p ~> unmarshal[TokenJson])
+
+      fResponse.flatMap(_(performRequest(request, credential))).transform[Token](
+        { Token(_) }, {checkExceptions}
+      )
+
+    }
+
+  }
+
 
   implicit object GetAccountsExecutor extends OperationExecutor[AccountsRequest, Accounts]{
 

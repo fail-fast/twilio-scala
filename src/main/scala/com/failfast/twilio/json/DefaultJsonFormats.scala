@@ -10,6 +10,7 @@ trait DefaultJsonFormats {
   implicit val jsonFormatAccSubResource = jsonFormat10(AccountSubResourceJson)
   implicit val jsonFormatAcc = jsonFormat10(AccountJson)
   implicit val jsonFormatAccs = jsonFormat12(AccountsJson)
+  implicit val jsonFormatTokenJson = jsonFormat7(TokenJson)
   implicit val jsonFormatSubResourceUris = jsonFormat1(SubResourceUrisJson)
   implicit val jsonFormatMessage = jsonFormat18(MessageJson)
   implicit val jsonFormatAvailableCapabilities = jsonFormat3(Capabilities)
