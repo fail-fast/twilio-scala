@@ -48,7 +48,7 @@ object ExecutorImplicits extends Logging with DefaultJsonFormats{
 
     def execute(request: CreateTokenRequest) (credential: Credential): Future[Token] = {
 
-      val fResponse = pipeline.map( p => p ~> unmarshal[TokenJson])
+      val fResponse = pipeline.map{ p => p ~> unmarshal[TokenJson]}
 
       fResponse.flatMap(_(performRequest(request, credential))).transform[Token](
         { Token(_) }, {checkExceptions}
